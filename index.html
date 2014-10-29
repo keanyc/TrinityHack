@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>Wake up</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+	<script>
+	var 
+		// text line
+		line = [],
+
+		// last print time for printCharacter()
+		lastPrintTime = 0,
+		
+		// not clear the screen if it's the last line.
+		lastLine = false;
+		
+	line[0] = 'Wake up, Neo...',
+	line[1] = 'The Matrix has you...',
+	line[2] = 'Follow the white rabbit.',
+	line[3] = 'Knock, knock, Neo.';
+
+	window.onload = function(){
+		printAll(line);
+	}
+
+	printAll = function(line){
+		for(var i=0;i<line.length;i++){
+			if(i == line.length - 1)
+				lastLine = true;
+			printCharacter(line[i]);
+		}
+	}
+	printCharacter = function(str){
+		for(var i=0;i<str.length;i++){
+			printSpeed = 100 * usefloor(1,3);
+			printTime = printSpeed + lastPrintTime;
+			setTimeout('document.getElementById("screen").innerHTML = document.getElementById("screen").innerHTML + "' + str.substring(i,(i + 1)) + '";', printTime);	
+			lastPrintTime = printTime;
+		}
+		lastPrintTime = printTime + (1000 * usefloor(2,4));
+		if(!lastLine)
+			setTimeout('document.getElementById("screen").innerHTML = ""', lastPrintTime);	
+	}
+
+	function usefloor(min,max) {
+		return Math.floor(Math.random()*(max-min+1)+min);
+	}
+	</script>
+
+	<style>
+	body {
+		font-family: "Courier New"; 
+		color: #A0FCD7; 
+		font-size: large; 
+		background: #000; 
+		font-weight: bold; 
+		padding:20px;
+	} 
+	</style>
+
+</head>
+<body>
+	<div id="screen"></div>
+</body>
+</html>
